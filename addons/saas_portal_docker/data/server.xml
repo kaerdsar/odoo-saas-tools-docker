@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="server_saas_com" model="saas_portal.server">
+            <field name="name">server_subdomain</field>
+            <field name="client_id">server_client_id</field>
+        </record>
+
+    </data>
+</openerp>
