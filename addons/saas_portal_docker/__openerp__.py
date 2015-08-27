@@ -4,7 +4,7 @@
     'author': 'Cesar Lage',
     'category': 'SaaS',
     'website': 'https://it-projects.info',
-    'depends': ['saas_portal'],
+    'depends': ['saas_portal_demo_example'],
     'data': ['data/server.xml'],
     'installable': True,
 }

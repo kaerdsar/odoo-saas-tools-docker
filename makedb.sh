@@ -11,6 +11,7 @@ else
     uuid=$(cat /proc/sys/kernel/random/uuid)
 
     # Update docker addons for odoo
+    sed -i "s/server1.com</$SERVER_SUBDOMAIN</g" /mnt/odoo-saas-tools/saas_portal_demo_example/data/saas_portal_plan.xml
     sed -i "s/server_subdomain/$SERVER_SUBDOMAIN/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_server_docker/data/provider.xml
