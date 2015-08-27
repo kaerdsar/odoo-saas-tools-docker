@@ -1,6 +1,18 @@
-# Odoo SaaS Tools
+# Odoo SaaS Tools Docker
 
-Odoo (OpenERP) addons to provide SaaS
+Docker image for Odoo (OpenERP) addons to provide SaaS
+
+## Install the latest Docker package. Verify that you have wget installed.
+
+```console
+$ wget -qO- https://get.docker.com/ | sh
+```
+
+## Build image for Odoo SaaS
+
+```console
+$ docker build -t odoo-saas .
+```
 
 ## Start an Odoo SaaS instance
 
