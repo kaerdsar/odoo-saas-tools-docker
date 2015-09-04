@@ -39,10 +39,15 @@ RUN apt-get install --allow-unauthenticated -y supervisor postgresql odoo
 
 # Download Odoo SaaS Tools Addons
 RUN git clone https://github.com/yelizariev/odoo-saas-tools.git /mnt/odoo-saas-tools
-
-# Add Odoo Docker Addons
 COPY addons /addons
 RUN cp -a /addons/. /mnt/odoo-saas-tools/
+
+# Download Pos Addons
+RUN git clone https://github.com/yelizariev/pos-addons.git /mnt/pos-addons
+RUN cp -a /mnt/pos-addons/. /mnt/odoo-saas-tools/
+
+# Download Reminder Addons
+# ...
 
 # Update Odoo Conf
 COPY conf/openerp-server.conf /etc/odoo/

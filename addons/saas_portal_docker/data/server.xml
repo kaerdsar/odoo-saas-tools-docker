@@ -5,7 +5,10 @@
         <record id="saas_portal_demo_example.server1_com" model="saas_portal.server">
             <field name="name">server_subdomain</field>
             <field name="client_id">server_client_id</field>
+            <field name="request_port">8069</field>
         </record>
+
+        <function name="create_template_databases" model="saas_portal.plan_manager"/>
 
     </data>
 </openerp>

@@ -11,18 +11,26 @@ else
     uuid=$(cat /proc/sys/kernel/random/uuid)
 
     # Update docker addons for odoo
+    sed -i "s/odoo.local/$SERVER_SUBDOMAIN:8069/g" /mnt/odoo-saas-tools/saas_server/data/ir_config_parameter.xml
     sed -i "s/server1.com</$SERVER_SUBDOMAIN</g" /mnt/odoo-saas-tools/saas_portal_demo_example/data/saas_portal_plan.xml
     sed -i "s/server_subdomain/$SERVER_SUBDOMAIN/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_server_docker/data/provider.xml
 
+    # Create server database
+    su postgres -c "createdb -O odoo '$SERVER_SUBDOMAIN'"
+    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$SERVER_SUBDOMAIN' -i saas_server_docker --without-demo=all --stop-after-init"
+
     # Create portal database
     su postgres -c "createdb -O odoo '$MAIN_DOMAIN'"
     su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$MAIN_DOMAIN' -i saas_portal_docker --without-demo=all --stop-after-init"
 
-    # Create server database
-    su postgres -c "createdb -O odoo '$SERVER_SUBDOMAIN'"
-    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$SERVER_SUBDOMAIN' -i saas_server_docker --without-demo=all --stop-after-init"
+    # Update database template 1
+    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_pos_product_available.'$SERVER_SUBDOMAIN' -i pos_product_available --without-demo=all --stop-after-init"
+
+    # Update database template 2
+    # su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_reminders_and_agenda.'$SERVER_SUBDOMAIN' -i reminder_task_deadline --without-demo=all --stop-after-init"
+
 fi
 
 # Stop Postgresql server
