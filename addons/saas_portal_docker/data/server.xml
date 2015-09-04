@@ -8,7 +8,9 @@
             <field name="request_port">8069</field>
         </record>
 
-        <function name="create_template_databases" model="saas_portal.plan_manager"/>
+        <function name="create_template" model="saas_portal.plan"
+                eval="[ref('saas_portal_demo_example.plan_pos_product_available')]"
+        />
 
     </data>
 </openerp>
