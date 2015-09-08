@@ -1,18 +1,20 @@
 FROM odoo
+USER root
 
 # Install dependencies
 RUN set -x; \
     apt-get update \
-    && apt-get install -y --no-install-recommends \
-       python-inflect \
-       python-oauthlib \
-       python-pip \
-       git-core
+    && apt-get install -y --no-install-recommends python-oauthlib python-pip git-core \
+    && pip install inflect \
     && pip install requests[security] \
     && pip install erppeek
 
 # Download Odoo SaaS Tools Addons
 RUN git clone https://github.com/kaerdsar/odoo-saas-tools.git /mnt/odoo-saas-tools
+
+# Add Odoo Docker Addons
+COPY addons /addons
+RUN cp -a /addons/. /mnt/odoo-saas-tools/
 
 # Update Odoo Conf
 COPY conf/openerp-server.conf /etc/odoo/
