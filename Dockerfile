@@ -4,9 +4,9 @@ USER root
 # Install dependencies
 RUN set -x; \
     apt-get update \
-    && apt-get install -y --no-install-recommends python-oauthlib python-pip git-core \
+    && apt-get install -y --no-install-recommends \
+       python-oauthlib python-openssl python-ndg-httpsclient python-pyasn1 python-pip git-core \
     && pip install inflect \
-    && pip install requests[security] \
     && pip install erppeek
 
 # Download Odoo SaaS Tools Addons
