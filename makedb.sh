@@ -29,7 +29,7 @@ else
     su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_pos_product_available.'$SERVER_SUBDOMAIN' -i pos_product_available --without-demo=all --stop-after-init"
 
     # Update database template 2
-    # su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_reminders_and_agenda.'$SERVER_SUBDOMAIN' -i reminder_task_deadline --without-demo=all --stop-after-init"
+    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_reminders_and_agenda.'$SERVER_SUBDOMAIN' -i reminder_task_deadline --without-demo=all --stop-after-init"
 
 fi
 
