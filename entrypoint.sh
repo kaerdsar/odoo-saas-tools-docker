@@ -3,11 +3,11 @@
 set -e
 
 # Set odoo database host, port, user and password
-: ${PGHOST:=${RDS_HOSTNAME:=${PGHOST:='localhost'}}}
-: ${PGPORT:=${RDS_PORT:=${PGPORT:=5432}}}
+: ${PGHOST:=${RDS_HOSTNAME:=${PGHOST:=${DB_PORT_5432_TCP_ADDR:='localhost'}}}}
+: ${PGPORT:=${RDS_PORT:=${PGPORT:=${DB_PORT_5432_TCP_PORT:=5432}}}}
 : ${PGDB:=${RDS_DB_NAME:=${PGDB:='postgres'}}}
-: ${PGUSER:=${RDS_USERNAME:=${PGUSER:='odoo'}}}
-: ${PGPASSWORD:=${RDS_PASSWORD:=${PGPASSWORD}}}
+: ${PGUSER:=${RDS_USERNAME:=${PGUSER:=${DB_ENV_POSTGRES_USER:='odoo'}}}}
+: ${PGPASSWORD:=${RDS_PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${PGPASSWORD}}}}
 export PGHOST PGPORT PGUSER PGPASSWORD PGDB
 
 python /etc/odoo/makedb.py
