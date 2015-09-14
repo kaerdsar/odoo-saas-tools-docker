@@ -13,9 +13,9 @@ else
     # Update docker addons for odoo
     sed -i "s/odoo.local/$SERVER_SUBDOMAIN:8069/g" /mnt/odoo-saas-tools/saas_server/data/ir_config_parameter.xml
     sed -i "s/server1.com</$SERVER_SUBDOMAIN</g" /mnt/odoo-saas-tools/saas_portal_demo_example/data/saas_portal_plan.xml
-    sed -i "s/server_subdomain/$SERVER_SUBDOMAIN/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
-    sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_portal_docker/data/server.xml
-    sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-tools/saas_server_docker/data/provider.xml
+    sed -i "s/server_subdomain/$SERVER_SUBDOMAIN/g" /mnt/odoo-saas-docker/saas_portal_docker/data/server.xml
+    sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-docker/saas_portal_docker/data/server.xml
+    sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-docker/saas_server_docker/data/provider.xml
 
     # Create server database
     su postgres -c "createdb -O odoo '$SERVER_SUBDOMAIN'"
