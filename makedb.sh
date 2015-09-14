@@ -17,6 +17,10 @@ else
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-docker/saas_portal_docker/data/server.xml
     sed -i "s/server_client_id/$uuid/g" /mnt/odoo-saas-docker/saas_server_docker/data/provider.xml
 
+    # Update /etc/hosts
+    echo "127.0.0.1    $MAIN_DOMAIN" >> /etc/hosts
+    echo "127.0.0.1    $SERVER_SUBDOMAIN" >> /etc/hosts
+
     # Create server database
     su postgres -c "createdb -O odoo '$SERVER_SUBDOMAIN'"
     su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$SERVER_SUBDOMAIN' -i saas_server_docker --without-demo=all --stop-after-init"
