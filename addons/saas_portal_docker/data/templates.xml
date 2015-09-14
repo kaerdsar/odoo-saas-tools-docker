@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <function name="create_template" model="saas_portal.plan"
+                eval="[ref('saas_portal_demo_example.plan_pos_product_available')]"
+        />
+
+        <function name="create_template" model="saas_portal.plan"
+                eval="[ref('saas_portal_demo_example.plan_reminder_and_agenda')]"
+        />
+
+    </data>
+</openerp>
