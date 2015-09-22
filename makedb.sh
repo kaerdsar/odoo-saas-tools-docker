@@ -27,10 +27,10 @@ else
     su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$SERVER_SUBDOMAIN' -i saas_server_docker --without-demo=all --stop-after-init"
 
     # Create portal database
-    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf & export ODOO_SERVER_PID=$!"
+    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf"
     su postgres -c "createdb -O odoo '$MAIN_DOMAIN'"
-    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$MAIN_DOMAIN' -i saas_portal_docker --xmlrp-port=8079 --without-demo=all --stop-after-init"
-    su odod -s /bin/bash -c "kill -9 '$ODOO_SERVER_PID'"
+    su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d '$MAIN_DOMAIN' -i saas_portal_docker --xmlrpc-port=8079 --without-demo=all --stop-after-init"
+    kill $(ps aux | grep 'openerp' | awk '{print $2}')
 
     # Update database template 1
     su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d template_pos_product_available.'$SERVER_SUBDOMAIN' -i pos_product_available --without-demo=all --stop-after-init"
